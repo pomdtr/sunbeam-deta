@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://pomdtr.github.io/sunbeam/schemas/page.json
+type: list
+items:
+  - title: Sunbeam Deta
+    actions:
+      - type: http
+        url: https://sunbeamdeta-1-t6421214.deta.app
+        headers:
+          X-Space-App-Key: ${env:SPACE_APP_KEY}

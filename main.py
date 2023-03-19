@@ -1,6 +1,9 @@
+import os
 from fastapi import FastAPI
 
 app = FastAPI()
+
+DETA_API_KEY = os.getenv("DETA_API_KEY")
 
 
 @app.get("/")
@@ -10,11 +13,15 @@ async def root():
         "items": [
             {
                 "title": "First item",
-                "actions": [{"type": "http", "url": "./first-item"}],
+                "actions": [{"type": "http", "url": "./first-item", "headers": {
+                    "x-api-key": DETA_API_KEY,
+                }}],
             },
             {
                 "title": "Second item",
-                "actions": [{"type": "http", "url": "./second-item"}],
+                "actions": [{"type": "http", "url": "./second-item", "headers": {
+                    "x-api-key": DETA_API_KEY,
+                }}],
             },
         ],
     }
