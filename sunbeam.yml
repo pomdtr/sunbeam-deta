@@ -1,7 +1,11 @@
 # yaml-language-server: $schema=https://pomdtr.github.io/sunbeam/schemas/page.json
 type: list
 items:
-  - title: Sunbeam Deta
+  - title: Sunbeam Deta Local
+    actions:
+      - type: http
+        url: http://localhost:8000
+  - title: Sunbeam Deta Remote
     actions:
       - type: http
         url: https://sunbeamdeta-1-t6421214.deta.app

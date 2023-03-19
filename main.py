@@ -12,32 +12,51 @@ async def root():
         "type": "list",
         "items": [
             {
-                "title": "First item",
-                "actions": [{"type": "http", "url": "./first-item", "headers": {
-                    "x-api-key": DETA_API_KEY,
-                }}],
+                "title": "Detail",
+                "actions": [
+                    {
+                        "type": "http",
+                        "url": "./list",
+                        "headers": {
+                            "x-api-key": DETA_API_KEY,
+                        } if DETA_API_KEY else {},
+                    }
+                ],
             },
             {
-                "title": "Second item",
-                "actions": [{"type": "http", "url": "./second-item", "headers": {
-                    "x-api-key": DETA_API_KEY,
-                }}],
+                "title": "Form",
+                "actions": [
+                    {
+                        "type": "http",
+                        "url": "./hello?name=${input:name}",
+                        "headers": {
+                            "x-api-key": DETA_API_KEY,
+                        } if DETA_API_KEY else {},
+                        "inputs": [
+                            {
+                                "name": "name",
+                                "type": "textfield",
+                                "title": "Name",
+                            }
+                        ]
+                    }
+                ],
             },
         ],
     }
 
 
-@app.get("/first-item")
-async def first_item():
+@app.get("/list")
+async def list():
     return {
         "type": "detail",
-        "text": "This is the first item",
+        "text": "Detail, detail, detail",
     }
 
 
-@app.get("/second-item")
-async def second_item():
+@app.get("/hello")
+async def hello(name: str):
     return {
         "type": "detail",
-        "text": "This is the second item",
+        "text": f"Hello {name}",
     }
