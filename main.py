@@ -1,5 +1,6 @@
 import os
 from fastapi import FastAPI
+from sunbeam import List, ListItem
 
 app = FastAPI()
 
@@ -8,42 +9,7 @@ DETA_API_KEY = os.getenv("DETA_API_KEY")
 
 @app.get("/")
 async def root():
-    return {
-        "type": "list",
-        "items": [
-            {
-                "title": "Detail",
-                "actions": [
-                    {
-                        "type": "http",
-                        "url": "./list",
-                        "headers": {
-                            "x-api-key": DETA_API_KEY,
-                        } if DETA_API_KEY else {},
-                    }
-                ],
-            },
-            {
-                "title": "Form",
-                "actions": [
-                    {
-                        "type": "http",
-                        "url": "./hello?name=${input:name}",
-                        "headers": {
-                            "x-api-key": DETA_API_KEY,
-                        } if DETA_API_KEY else {},
-                        "inputs": [
-                            {
-                                "name": "name",
-                                "type": "textfield",
-                                "title": "Name",
-                            }
-                        ]
-                    }
-                ],
-            },
-        ],
-    }
+    return List(items=[ListItem(title="detail", actions=[])]).dict()
 
 
 @app.get("/list")
